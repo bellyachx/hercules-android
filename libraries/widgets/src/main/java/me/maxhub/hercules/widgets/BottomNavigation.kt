@@ -14,11 +14,13 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -42,7 +44,9 @@ fun BottomNavigation(
                 item = item,
                 isSelected = item == selectedItem,
                 onClick = { onItemSelected(item) },
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(top = 12.dp, bottom = 16.dp)
             )
         }
     }
@@ -56,25 +60,28 @@ fun BottomNavItemWidget(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier
-            .clickable(onClick = onClick)
-            .padding(top = 12.dp, bottom = 16.dp),
+        modifier = modifier.clickable(onClick = onClick),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         Box(
-            modifier = modifier,
+            modifier = Modifier,
             contentAlignment = Alignment.Center
         ) {
             Icon(
                 imageVector = item.icon,
                 contentDescription = null,
-                tint = if (isSelected) Color.Yellow else Color.Blue,
+                tint = if (isSelected) Color.White else Color.DarkGray,
                 modifier = Modifier
                     .padding(4.dp)
                     .size(24.dp)
             )
         }
+        Text(
+            text = stringResource(item.labelRes),
+            color = if (isSelected) Color.White else Color.DarkGray,
+            modifier = Modifier.padding(top = 4.dp),
+        )
     }
 }
 
