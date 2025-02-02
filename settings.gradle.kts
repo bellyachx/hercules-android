@@ -1,3 +1,7 @@
+@file:Suppress("UnstableApiUsage")
+
+include(":libraries:mvi")
+
 pluginManagement {
     repositories {
         google {
@@ -20,4 +24,6 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "Hercules"
+
 include(":app")
+include(":libraries:widgets")
