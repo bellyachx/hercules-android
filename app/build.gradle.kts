@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-//    alias(libs.plugins.google.services)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
 }
@@ -54,6 +53,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":libraries:mvi"))
     implementation(project(":libraries:widgets"))
 
     implementation(libs.material)
@@ -73,6 +73,8 @@ dependencies {
     implementation(libs.hilt.viewmodel)
     implementation(libs.hilt.savedstatehandle)
     kapt(libs.hilt.compiler)
+
+    implementation("io.coil-kt:coil-compose:2.2.2") // or the latest version available
 
     implementation(libs.glide.compose)
     implementation(libs.glide.integration)
