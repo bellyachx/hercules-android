@@ -1,6 +1,9 @@
 package me.maxhub.hercules
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.view.ViewTreeObserver
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,10 +22,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import me.maxhub.hercules.api.TokenCache
+import me.maxhub.hercules.login.LoginActivity
 import me.maxhub.hercules.mvi.navigation.ViewModelNavigator
-import me.maxhub.hercules.navigation.home.HomeDestination
 import me.maxhub.hercules.navigation.MainDestination
 import me.maxhub.hercules.navigation.MainNavHost
+import me.maxhub.hercules.navigation.home.HomeDestination
 import me.maxhub.hercules.widgets.BottomNavItem
 import me.maxhub.hercules.widgets.BottomNavigation
 import javax.inject.Inject
@@ -33,9 +38,37 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var homeNavigator: ViewModelNavigator<HomeDestination>
 
+    @Inject
+    lateinit var tokenCache: TokenCache
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val content: View = findViewById(android.R.id.content)
+        val preDrawListener = object : ViewTreeObserver.OnPreDrawListener {
+            override fun onPreDraw(): Boolean {
+                val viewTreeObserver = content.viewTreeObserver
+                if (viewTreeObserver.isAlive) {
+                    viewTreeObserver.removeOnPreDrawListener(this)
+                }
+
+                if (tokenCache.getAccessToken().isNullOrBlank() &&
+                    tokenCache.getRefreshToken().isNullOrBlank()) {
+                    val intent = Intent(
+                        this@MainActivity,
+                        LoginActivity::class.java
+                    ).apply {
+                        flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
+                    startActivity(intent)
+                    finish()
+                    return false
+                }
+                return true
+            }
+        }
+        content.viewTreeObserver.addOnPreDrawListener(preDrawListener)
         setContent {
             val rootNavController = rememberNavController()
 

@@ -36,5 +36,6 @@ dependencies {
     implementation(libs.kotlinx.serialization.converter)
 
     implementation(libs.hilt.android)
+    implementation(libs.androidx.security.crypto)
     kapt(libs.hilt.compiler)
 }

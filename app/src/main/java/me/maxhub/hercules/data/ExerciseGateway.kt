@@ -26,5 +26,15 @@ class ExerciseGatewayImpl @Inject constructor(
 }
 
 private fun ExerciseModel.toDomainModel(): Exercise {
-    return Exercise(id, name, description, setsCount, repsCount, duration, muscleGroups, difficulty, exerciseType);
+    return Exercise(
+        id,
+        name,
+        description,
+        setsCount,
+        repsCount,
+        duration,
+        muscleGroups,
+        difficulty,
+        exerciseType
+    );
 }
