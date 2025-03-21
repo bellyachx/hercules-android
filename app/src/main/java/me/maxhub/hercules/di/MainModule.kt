@@ -17,12 +17,12 @@ abstract class MainModule {
     @Binds
     abstract fun bindNavigator(
         impl: ViewModelNavigator<MainDestination>
-    ) : Navigator<MainDestination>
+    ): Navigator<MainDestination>
 
     @Binds
     abstract fun bindHomeNavigator(
         impl: ViewModelNavigator<HomeDestination>
-    ) : Navigator<HomeDestination>
+    ): Navigator<HomeDestination>
 
     @Binds
     abstract fun bindExerciseGateway(

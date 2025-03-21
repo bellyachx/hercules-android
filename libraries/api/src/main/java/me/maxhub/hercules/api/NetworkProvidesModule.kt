@@ -35,11 +35,19 @@ object NetworkProvidesModule {
 
     @Provides
     @Singleton
-    internal fun provideOkHttClient(): OkHttpClient {
+    internal fun provideOkHttClient(authInterceptor: AuthInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(authInterceptor)
+            .addInterceptor(ErrorInterceptor())
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build()
     }
+
+    @Provides
+    @Singleton
+    internal fun provideAuthInterceptor(
+        tokenManager: TokenManager,
+    ): AuthInterceptor = AuthInterceptor(tokenManager)
 
     @Provides
     @Singleton

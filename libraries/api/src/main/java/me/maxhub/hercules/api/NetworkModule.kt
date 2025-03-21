@@ -13,7 +13,13 @@ import javax.inject.Singleton
 interface NetworkModule {
     @Binds
     @Singleton
-    abstract fun bindExerciseDataSource(
+    fun bindExerciseDataSource(
         impl: ExerciseDataSourceImpl
     ): ExerciseDataSource
+
+    @Binds
+    @Singleton
+    fun bindTokenCache(
+        impl: TokenCacheImpl
+    ): TokenCache
 }

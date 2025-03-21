@@ -18,6 +18,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["appAuthRedirectScheme"] = "me.maxhub.hercules"
     }
 
     buildTypes {
@@ -58,6 +59,7 @@ dependencies {
     implementation(project(":libraries:mvi"))
     implementation(project(":libraries:widgets"))
 
+    implementation("net.openid:appauth:0.11.1")
     implementation(libs.material)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.core.ktx)
