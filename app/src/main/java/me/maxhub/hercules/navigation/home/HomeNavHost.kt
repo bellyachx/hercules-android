@@ -28,5 +28,6 @@ internal fun HomeNavHost(
         },
     ) {
         HomeDestination.Home.register(this)
+        HomeDestination.ExerciseDetails.register(this)
     }
 }

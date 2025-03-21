@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -53,6 +54,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":libraries:api"))
     implementation(project(":libraries:mvi"))
     implementation(project(":libraries:widgets"))
 
@@ -74,7 +76,8 @@ dependencies {
     implementation(libs.hilt.savedstatehandle)
     kapt(libs.hilt.compiler)
 
-    implementation("io.coil-kt:coil-compose:2.2.2") // or the latest version available
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.retrofit.core)
 
     implementation(libs.glide.compose)
     implementation(libs.glide.integration)

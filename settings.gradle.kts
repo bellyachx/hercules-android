@@ -1,5 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
+include(":libraries:api")
+
+
 include(":libraries:mvi")
 
 pluginManagement {
