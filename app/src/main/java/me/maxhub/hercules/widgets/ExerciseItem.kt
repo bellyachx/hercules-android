@@ -9,7 +9,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlin.time.Duration
 
 data class ExerciseUIModel(
@@ -46,7 +48,10 @@ fun ExerciseListItem(
             )
             if (uiModel.exerciseType?.isNotBlank() == true) {
                 Text(
-                    text = uiModel.exerciseType
+                    text = uiModel.exerciseType,
+                    fontSize = 12.sp,
+                    color = Color.Gray,
+                    modifier = Modifier.padding(top = 4.dp)
                 )
             }
         }

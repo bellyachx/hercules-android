@@ -8,19 +8,26 @@ plugins {
 
 android {
     namespace = "me.maxhub.hercules"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "me.maxhub.hercules"
         minSdk = 26
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["appAuthRedirectScheme"] = "me.maxhub.hercules"
     }
-
+//    signingConfigs {
+//        create("release") {
+//            storeFile = file(System.getenv("KEYSTORE_FILE"))
+//            storePassword = System.getenv("KEYSTORE_PASSWORD")
+//            keyAlias = System.getenv("KEYSTORE_ALIAS")
+//            keyPassword = System.getenv("KEYSTORE_PASSWORD")
+//        }
+//    }
     buildTypes {
         defaultConfig {
             multiDexEnabled = true
@@ -32,6 +39,9 @@ android {
                 "proguard-rules.pro"
             )
         }
+//        getByName("release") {
+//            signingConfig = signingConfigs.getByName("release")
+//        }
         debug {
             applicationIdSuffix = ".test"
         }
@@ -59,7 +69,7 @@ dependencies {
     implementation(project(":libraries:mvi"))
     implementation(project(":libraries:widgets"))
 
-    implementation("net.openid:appauth:0.11.1")
+    implementation(libs.openid.appauth)
     implementation(libs.material)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.core.ktx)
@@ -67,6 +77,7 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.material3.android)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.runtime.compose)
     implementation(libs.runtime.viewmodel)
@@ -74,6 +85,7 @@ dependencies {
 
     implementation(libs.hilt.android)
     implementation(libs.hilt.compose)
+    implementation(libs.hilt.common)
     implementation(libs.hilt.viewmodel)
     implementation(libs.hilt.savedstatehandle)
     kapt(libs.hilt.compiler)

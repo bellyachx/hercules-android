@@ -19,18 +19,12 @@
             android:theme="@style/Theme.Hercules">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="me.maxhub.hercules" />
             </intent-filter>
         </activity>
         <activity
             android:name=".login.LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Hercules" />
     </application>
-
 </manifest>
